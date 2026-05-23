@@ -1,4 +1,4 @@
-const updateOwner = process.env.AURA_UPDATE_OWNER || process.env.GITHUB_REPOSITORY_OWNER || '';
+const updateOwner = process.env.AURA_UPDATE_OWNER || process.env.GITHUB_REPOSITORY_OWNER || 'murofixbhop-dot';
 const updateRepo = process.env.AURA_UPDATE_REPO || 'AuraDesktop';
 
 const config = {

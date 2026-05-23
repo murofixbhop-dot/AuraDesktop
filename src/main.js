@@ -21,7 +21,7 @@ const { autoUpdater } = require('electron-updater');
 const APP_ID = 'com.aura.messenger.desktop';
 const DEFAULT_SERVER_URL = 'https://chat-9l7f.onrender.com';
 const UPDATE_REPO = process.env.AURA_UPDATE_REPO || 'AuraDesktop';
-const UPDATE_OWNER = process.env.AURA_UPDATE_OWNER || process.env.GITHUB_REPOSITORY_OWNER || '';
+const UPDATE_OWNER = process.env.AURA_UPDATE_OWNER || process.env.GITHUB_REPOSITORY_OWNER || 'murofixbhop-dot';
 const IS_DEV = !app.isPackaged || process.env.AURA_ELECTRON_DEV === '1';
 
 let mainWindow = null;
