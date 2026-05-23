@@ -39,6 +39,7 @@ if (!gotLock) {
 }
 
 const sourceServer = normalizeServerUrl(process.env.AURA_SERVER_URL || DEFAULT_SERVER_URL);
+const appPath = normalizeAppPath(process.env.AURA_APP_PATH || '/');
 const appUrl = buildAppUrl(sourceServer);
 const serverOrigin = new URL(sourceServer).origin;
 
@@ -52,8 +53,14 @@ function normalizeServerUrl(value) {
   }
 }
 
+function normalizeAppPath(value) {
+  const raw = String(value || '/').trim();
+  if (!raw || raw === '/') return '/';
+  return raw.startsWith('/') ? raw : `/${raw}`;
+}
+
 function buildAppUrl(base) {
-  const url = new URL('/app.html', base);
+  const url = new URL(appPath, base);
   url.searchParams.set('desktop', '1');
   url.searchParams.set('platform', process.platform);
   return url.toString();
@@ -71,8 +78,10 @@ function withDesktopParams(value) {
   try {
     const url = new URL(value, sourceServer);
     if (url.origin !== serverOrigin) return value;
-    if (url.pathname === '/' || url.pathname === '') url.pathname = '/app.html';
-    if (url.pathname === '/app.html') {
+    if ((url.pathname === '/' || url.pathname === '') && appPath !== '/') {
+      url.pathname = appPath;
+    }
+    if (url.pathname === '/' || url.pathname === appPath || url.pathname === '/app.html') {
       url.searchParams.set('desktop', '1');
       url.searchParams.set('platform', process.platform);
     }
@@ -329,6 +338,7 @@ function showOffline(message) {
   const offlinePath = path.join(__dirname, 'offline.html');
   const query = new URLSearchParams({
     server: sourceServer,
+    appPath,
     message: String(message || '')
   });
   mainWindow.loadFile(offlinePath, { query: Object.fromEntries(query.entries()) }).catch(() => {});

@@ -1,6 +1,6 @@
 {
   "name": "aura-desktop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Aura Messenger desktop client for Windows",
   "productName": "Aura Messenger",
   "main": "src/main.js",
@@ -9,8 +9,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "cross-env ELECTRON_RUN_AS_NODE= electron .",
-    "start:render": "cross-env ELECTRON_RUN_AS_NODE= AURA_SERVER_URL=https://chat-9l7f.onrender.com electron .",
-    "dev": "cross-env ELECTRON_RUN_AS_NODE= AURA_SERVER_URL=http://localhost:3001 AURA_ELECTRON_DEV=1 electron .",
+    "start:render": "cross-env ELECTRON_RUN_AS_NODE= AURA_SERVER_URL=https://chat-9l7f.onrender.com AURA_APP_PATH=/ electron .",
+    "dev": "cross-env ELECTRON_RUN_AS_NODE= AURA_SERVER_URL=http://localhost:3001 AURA_APP_PATH=/app.html AURA_ELECTRON_DEV=1 electron .",
     "assets:icon": "node scripts/generate-icons.js",
     "build:win": "npm run assets:icon && electron-builder --config electron-builder.config.cjs --win nsis portable",
     "publish:win": "npm run assets:icon && electron-builder --config electron-builder.config.cjs --win nsis portable --publish always"

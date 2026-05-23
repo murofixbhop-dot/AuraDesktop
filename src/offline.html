@@ -62,10 +62,11 @@
   <script>
     const params = new URLSearchParams(location.search);
     const server = params.get('server') || 'https://chat-9l7f.onrender.com';
+    const appPath = params.get('appPath') || '/';
     const message = params.get('message') || '';
     document.getElementById('details').textContent = message;
     document.getElementById('retry').addEventListener('click', () => window.auraDesktop.reload());
-    document.getElementById('browser').addEventListener('click', () => window.auraDesktop.openExternal(server + '/app.html'));
+    document.getElementById('browser').addEventListener('click', () => window.auraDesktop.openExternal(server.replace(/\/+$/, '') + appPath));
   </script>
 </body>
 </html>
