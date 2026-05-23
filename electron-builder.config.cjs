@@ -59,7 +59,8 @@ if (updateOwner) {
     {
       provider: 'github',
       owner: updateOwner,
-      repo: updateRepo
+      repo: updateRepo,
+      releaseType: 'release'
     }
   ];
 }
